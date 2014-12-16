@@ -1,6 +1,9 @@
 History
 -------
 
+**0.1.2 (2014-12-16)**
+  * Included dotfiles.sh
+
 **0.1.1 (2014-12-16)**
   * Included github.sh
   * Fix pip.sh site
