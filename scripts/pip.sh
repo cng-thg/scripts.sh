@@ -6,7 +6,7 @@
 #
 # Usage       : chmod +x ./pip.sh && ./pip.sh
 #
-# Site        : github.com/cng-thg/pip.sh
+# Site        : github.com/cng-thg/scripts.sh
 # Author      : Thiago Cangussu <cng.thg@gmail.com>
 # Maintainer  : Thiago Cangussu <cng.thg@gmail.com>
 # Date        : 20141204
