@@ -28,6 +28,7 @@ Usage: $(basename "$0") [-h | -c | -l]
   -c, --config    Check if dotfiles folder and dotfiles list exists.
                   If not, it will create them.
   -l, --link      Create symbolic link for files in dotfiles list.
+  -a, --add       Add files to dotfiles folder and creates symbolic link.
 "
 
 
@@ -83,6 +84,11 @@ backup_files() {
   echo "Done."
 }
 
+# Create links
+create_links() {
+  echo "Creating link."
+  ln -s $1 $2
+}
 
 # Link files
 link_dotfiles() {
@@ -94,10 +100,25 @@ link_dotfiles() {
       backup_files $HOME/.$LINE
       echo "Creating link."
       ln -s ${DOTFILES}/$LINE $HOME/.$LINE
+    elif [ $? -eq 1 ]
+    then
+      echo "Creating link."
+      ln -s ${DOTFILES}/$LINE $HOME/.$LINE
     else
       echo "File is already in place. Done."
     fi
   done
+}
+
+# Move and rename files
+mv_files() {
+  mv $1 ${DOTFILES}/$(echo ${1} | cut -d '.' -f 2)
+}
+
+# Add files and links
+add_files() {
+  mv_files $1
+  create_links ${DOTFILES}/$(echo ${1} | cut -d '.' -f 2) $1
 }
 
 
@@ -115,6 +136,10 @@ case "$1" in
 
   -l | --link)
     link_dotfiles ${DOTFILES_LIST_PATH}
+  ;;  
+
+  -a | --add)
+    add_files $2
   ;;
 
   *)
